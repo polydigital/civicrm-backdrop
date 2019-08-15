@@ -409,27 +409,6 @@ function _civicrm_install_db($dbuser, $dbpass, $dbhost, $dbname,
       civicrm_source($dsn, $data_file);
       civicrm_source($dsn, $acl_file);
   }
-  else {
-    // testing the translated sql files availability
-    $data_file = $sqlPath . '/civicrm_data.mysql';
-    $acl_file = $sqlPath . '/civicrm_acl.mysql';
-    if ($lang != '') {
-      if (file_exists($sqlPath . '/civicrm_data.' . $lang . '.mysql')
-        and file_exists($sqlPath . '/civicrm_acl.' . $lang . '.mysql')
-        and $lang != ''
-      ) {
-        $data_file = $sqlPath . '/civicrm_data.' . $lang . '.mysql';
-        $acl_file = $sqlPath . '/civicrm_acl.' . $lang . '.mysql';
-      }
-      else {
-        drush_log(dt("No sql files could be retrieved for \"" . $lang .
-                      "\", using default language."
-        ), 'warning');
-      }
-    }
-    civicrm_source($dsn, $data_file);
-    civicrm_source($dsn, $acl_file);
-  }
   drush_log(dt("CiviCRM database loaded successfully."), 'ok');
 }
 
